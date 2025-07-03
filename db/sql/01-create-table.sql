@@ -26,5 +26,5 @@ CREATE TABLE rental
     rental_datetime DATETIME NOT NULL,
     return_deadline DATETIME NOT NULL,
     FOREIGN KEY (book_id) REFERENCES book (id),
-    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (user_id) REFERENCES user (id)
 )
