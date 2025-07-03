@@ -1,0 +1,18 @@
+#Docker Compose 複数のdockerコンテナを同時に立ち上げることができるツール
+
+service:
+  #MariaDB
+  db: #設定ファイル内の識別子
+    image: mariadb:lts  #ベースにするdockerイメージ。ltsは長期サポート版
+    ports:  #ポート番号の対応づけ ホスト側:コンテナ内
+      - "3306:3306"
+    container_name: mariadb_host  #ターミナルで呼び出すときのコンテナ名
+    environment:  #環境変数
+      MARIADB_ROOT_PASSWORD: root-tekitou #rootのパスワード(書き換え不可)
+    volumes:
+      - type: bind  #bind ホストのディレクトリ(source)とコンテナ内のディレクトリ(target)を連動させる
+        source: ./db/data
+        target: /var/lib/mysql
+      - type: bind
+        source: ./db/sql  #DBの初期化用のディレクトリ
+        target: /docker-entrypoint-initdb.d
