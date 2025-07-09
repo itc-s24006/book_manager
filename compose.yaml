@@ -1,6 +1,6 @@
 #Docker Compose 複数のdockerコンテナを同時に立ち上げることができるツール
 
-service:
+services:
   #MariaDB
   db: #設定ファイル内の識別子
     image: mariadb:lts  #ベースにするdockerイメージ。ltsは長期サポート版

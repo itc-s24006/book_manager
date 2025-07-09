@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "https://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="MariaDBTables" targetRuntime="MyBatis3Kotlin">
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <!-- ↓build.gradle.ktsからひっぱってる -->
+        <jdbcConnection
+                driverClass="${driverClass}"
+                connectionURL="${connectionURL}"
+                userId="${username}"
+                password="${password}" />
+        <javaTypeResolver>
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+        <javaModelGenerator
+                targetPackage="jp.ac.it_college.std.s24006.kotlin.book.manager.infrastructure.database.record"
+                targetProject="src/main/kotlin" />
+        <javaClientGenerator
+                targetPackage="jp.ac.it_college.std.s24006.kotlin.book.manager.infrastructure.database.mapper"
+                targetProject="src/main/kotlin" />
+        <!-- catalog    mariadbのテーブルを正しく読み取るためにデータベース名を書く必要がある -->
+        <table tableName="%" catalog="book_manager">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <columnOverride column="role_type" typeHandler="org.apache.ibatis.type.EnumTypeHandler"
+                            javaType="jp.ac.it_college.std.s24006.kotlin.book.manager.domain.types.RoleType" />
+        </table>
+    </context>
+</generatorConfiguration>
