@@ -1,6 +1,5 @@
 package jp.ac.it_college.std.s24006.kotlin.book.manager.infrastructure.database.record
 
-import org.intellij.lang.annotations.Identifier
 import java.time.LocalDate
 import java.time.LocalDateTime
 
