@@ -16,3 +16,13 @@ services:
       - type: bind
         source: ./db/sql  #DBの初期化用のディレクトリ
         target: /docker-entrypoint-initdb.d
+
+  #ValKey
+  session:
+    image: valkey/valkey:8.1
+    ports:
+      - "6379:6379"
+    volumes:
+      - type: bind
+        source: ./valkey
+        target: /data
