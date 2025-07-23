@@ -32,6 +32,7 @@ dependencies {
     implementation("org.bouncycastle:bcprov-jdk18on:1.81")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.session:spring-session-data-redis")
+    implementation("org.springframework.boot:spring-boot-starter-aop")
     testImplementation("org.springframework.security:spring-security-test")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
