@@ -42,4 +42,20 @@ class RentalService(
             Rental(bookId, userId, rentalDatetime, returnDeadline)
         )
     }
+
+    @Transactional
+    fun endRental(bookId: Long, userId: Long) {
+        userRepository.find(userId) ?: throw @ResponseStatus(HttpStatus.FORBIDDEN) object
+            : IllegalArgumentException("該当するユーザーが存在しません ID: $userId") {}
+        val book = bookRepository.findWithRental(bookId)
+            ?: throw @ResponseStatus(HttpStatus.NOT_FOUND) object
+                : IllegalArgumentException("該当する書籍が存在しません ID: $bookId") {}
+        if (!book.isRental) throw @ResponseStatus(HttpStatus.CONFLICT) object
+            : IllegalArgumentException("貸出中の書籍ではありません ID: $bookId") {}
+        //貸出者以外が返却できない仕様↓　✗ Aさんが借りた本をBさんが返しに来る
+        if (book.rental?.userId != userId) throw @ResponseStatus(HttpStatus.FORBIDDEN) object
+            : IllegalArgumentException("他のユーザーへ貸出中の書籍です") {}
+
+        rentalRepository.endRental(bookId)
+    }
 }
